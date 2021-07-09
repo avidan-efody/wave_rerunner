@@ -8,6 +8,6 @@ cocotb
 
 ## instructions
 
-source sourceme
-source run.csh
-source rerun.csh
+- source sourceme
+- source run.csh
+- source rerun.csh
