@@ -1,0 +1,7 @@
+setenv SNPSLMD_LICENSE_FILE '26586@synopsys21p.elic.intel.com:26586@synopsys22p.elic.intel.com:26586@synopsys04p.elic.intel.com:26586@synopsys40p.elic.intel.com:26586@synopsys23p.elic.intel.com:26586@synopsys44p.elic.intel.com:26586@synopsys01p.elic.intel.com:26586@synopsys29p.elic.intel.com:26586@synopsys60p.elic.intel.com:26586@synopsys10p.elic.intel.com:26586@synopsys11p.elic.intel.com:26586@synopsys12p.elic.intel.com:26586@synopsys13p.elic.intel.com:26586@synopsys16p.elic.intel.com'
+setenv VERDI_HOME /p/hdk/rtl/cad/x86-64_linux44/synopsys/verdi3/R-2020.12/
+setenv VCS_HOME /p/hdk/rtl/cad/x86-64_linux44/synopsys/vcsmx/Q-2020.03-SP2-2
+setenv PYTHONPATH $VERDI_HOME/share/NPI/python/:/nfs/site/disks/home_user/aefody/.local/lib/python3.7/site-packages/
+setenv LD_LIBRARY_PATH /nfs/site/disks/home_user/aefody/.local/lib/python3.7/site-packages/cocotb/libs:$VERDI_HOME/share/NPI/lib/linux64/:/nfs/site/disks/crt_tools_020/synopsys/verdi3/R-2020.12/share/NPI/python/pynpi:/p/dpg/arch/perfhome/python/miniconda/lib/
+setenv PATH $VERDI_HOME/bin:/nfs/site/disks/home_user/aefody/.local/bin/:$VCS_HOME/bin:$PATH
+

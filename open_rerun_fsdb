@@ -1,0 +1,1 @@
+verdi -dbdir simv.daidir/ -ssf rerun.fsdb
