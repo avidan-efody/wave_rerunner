@@ -1,0 +1,6 @@
+setenv CDS_LIC_FILE value-here
+setenv INDAGO_ROOT value-here
+setenv PYTHONPATH value-here
+setenv LD_LIBRARY_PATH value-here
+setenv PATH value-here
+

@@ -1,0 +1,10 @@
+setenv WAVE_RERUNNER value-here
+
+
+setenv SNPSLMD_LICENSE_FILE value-here
+setenv VERDI_HOME value-here
+setenv VCS_HOME value-here
+setenv PYTHONPATH value-here
+setenv LD_LIBRARY_PATH value-here
+setenv PATH value-here
+

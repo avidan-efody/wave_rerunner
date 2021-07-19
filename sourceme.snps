@@ -1,8 +1,0 @@
-setenv SNPSLMD_LICENSE_FILE lic-file
-setenv VERDI_HOME verdi-home
-setenv VCS_HOME vcs-home
-setenv COCOTB_LOCATION 'site-packages-for-cocotb'
-setenv PYTHONPATH $VERDI_HOME/share/NPI/python/:$COCOTB_LOCATION
-setenv LD_LIBRARY_PATH $COCOTB_LOCATION/cocotb/libs:$VERDI_HOME/share/NPI/lib/linux64/
-setenv PATH $VERDI_HOME/bin:$VCS_HOME/bin:$PATH
-
