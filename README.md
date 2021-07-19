@@ -8,6 +8,8 @@ This repo contains:
 -- replaying UVM monitors, checkers, coverage from wave, for fast developement cycle of coverage/checkers
 -- batch searching of wave files and extraction of signal level coverage data from wave
 
+![alt-text](https://github.com/avidan-efody/assertion_rerun/blob/main/assertion-rerun.gif)
+
 ## pre-requisites
 
 - cocotb (currently required for injecting anything back)
