@@ -1,1 +1,0 @@
-rm -rf simv simv.daidir/ ucli.key __pycache__/ ./csrc/ *.fsdb  novas_dump.log results.xml novas.* verdiLog npiLog

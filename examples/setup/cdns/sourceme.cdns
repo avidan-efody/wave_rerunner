@@ -1,6 +1,15 @@
-setenv CDS_LIC_FILE value-here
-setenv INDAGO_ROOT value-here
-setenv PYTHONPATH value-here
-setenv LD_LIBRARY_PATH value-here
-setenv PATH value-here
+setenv WAVE_RERUNNER `pwd`/../../../
+setenv UVM_HOME path-to-uvm-1.2/ 
 
+setenv CDS_LIC_FILE 'license-servers'
+
+setenv INDAGO_ROOT 'indago-root'
+setenv XCELIUM_HOME 'xcelium_home'
+
+setenv PATH XCELIUM_HOME/tools.lnx86/bin/:$PATH
+
+setenv COCOTB_LOCATION 'cocotb-location'
+
+setenv PYTHONPATH $WAVE_RERUNNER/:$COCOTB_LOCATION/lib/python3.7/site-packages/
+
+setenv LD_LIBRARY_PATH $COCOTB_LOCATION/lib/python3.7/site-packages/cocotb/libs/

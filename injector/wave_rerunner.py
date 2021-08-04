@@ -1,11 +1,12 @@
 # This file is public domain, it can be freely copied without restrictions.
 # SPDX-License-Identifier: CC0-1.0
+import os
 
 import cocotb
 
 from cocotb.triggers import Timer
 
-from wave.fsdb_reader import FsdbReader
+from wave.reader import read_wave
 
 from injector.cocotb_injector import CocotbInjector
 
@@ -14,7 +15,7 @@ async def test_empty(dut):
     """ doesn't do anything. workaround for COCOTB_SIM define not working? """
     print("starting replay")
 
-    data = FsdbReader("top.block_i", "novas.fsdb")
+    data = read_wave()
     print(data.signal_values)
     injector = CocotbInjector(dut)
 

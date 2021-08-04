@@ -1,10 +1,16 @@
-setenv WAVE_RERUNNER value-here
+setenv WAVE_RERUNNER `pwd`/../../../
+setenv UVM_HOME path-to-uvm-1.2/ 
 
+setenv SNPSLMD_LICENSE_FILE 'license-servers'
 
-setenv SNPSLMD_LICENSE_FILE value-here
-setenv VERDI_HOME value-here
-setenv VCS_HOME value-here
-setenv PYTHONPATH value-here
-setenv LD_LIBRARY_PATH value-here
-setenv PATH value-here
+setenv VERDI_HOME 'verdi-home'
+setenv VCS_HOME 'vcs-home'
+
+setenv COCOTB_LOCATION 'cocotb-location'
+
+setenv PYTHONPATH $WAVE_RERUNNER/:$VERDI_HOME/share/NPI/python/:$COCOTB_LOCATION/lib/python3.7/site-packages/
+
+setenv LD_LIBRARY_PATH $COCOTB_LOCATION/lib/python3.7/site-packages/cocotb/libs:$VERDI_HOME/share/NPI/lib/linux64/:$VERDI_HOME/share/NPI/python/pynpi
+
+setenv PATH $VERDI_HOME/bin:$VCS_HOME/bin:$PATH
 

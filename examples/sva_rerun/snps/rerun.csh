@@ -1,9 +1,9 @@
 #!/usr/bin/csh
 
-setenv PYTHONPATH ../:$PYTHONPATH
+setenv PYTHONPATH `pwd`:$PYTHONPATH
 
 # required by cocotb
-setenv MODULE replay_wave
+setenv MODULE injector.wave_rerunner
 setenv TESTCASE ''
 setenv TOPLEVEL top 
 setenv TOPLEVEL_LANG verilog

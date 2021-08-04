@@ -1,11 +1,20 @@
-class ReaderBase:
-    def __init__(self, replay_block, wave_file):     
-        self.replay_block = replay_block
 
-        self.signal_values = self.extract_values_from_wave(self.replay_block)
+class ScopeNotFound(Exception):
+    pass
+
+class ReaderBase:
+    def __init__(self, replay_blocks, wave_file, excluded_sigs, inputs_only):     
+        self.excluded_sigs = excluded_sigs if excluded_sigs != None else []
+        self.inputs_only = inputs_only if inputs_only != None else True
+
+        if type(replay_blocks) != list:
+            replay_blocks = [replay_blocks]
+        self.replay_blocks = replay_blocks
+
+        self.signal_values = self.extract_values_from_wave(self.replay_blocks, self.excluded_sigs, inputs_only)
         self.signal_changes = self.extract_events(self.signal_values)
 
-    def extract_values_from_wave(self, replay_block):
+    def extract_values_from_wave(self, replay_blocks, excluded_sigs = [], inputs_only=True):
     	pass
 
     def extract_events(self, signal_values):
