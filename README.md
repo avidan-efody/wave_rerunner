@@ -24,3 +24,11 @@ This repo contains:
 * ./rerun.csh
 
 ![alt-text](https://github.com/avidan-efody/assertion_rerun/blob/main/examples/sva_rerun/assertion-rerun.gif)
+
+### UVM rerun
+
+* cd examples/snps/setup
+* source sourceme.snps
+* cd ../../uvm_rerun
+* ./run.csh
+* ./rerun.csh
