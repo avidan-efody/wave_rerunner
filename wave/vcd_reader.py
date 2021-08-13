@@ -5,18 +5,17 @@ import re
 from wave.reader_base import ReaderBase
 
 class VcdReader(ReaderBase):
-    def __init__(self, replay_blocks, wave_file ,signal_list, inputs_only):
+    def __init__(self, replay_blocks, wave_file, excluded_sigs, inputs_only):
         self.vcd_path = wave_file #self.check_file_names_are_valid(wave_file)
-        self.signal_list = signal_list
-        super().__init__(replay_blocks, wave_file, signal_list, inputs_only)
+        super().__init__(replay_blocks, wave_file, excluded_sigs, inputs_only)
 
-    def extract_values_from_wave(self, replay_blocks, excluded_sigs = [], inputs_only=True):
-        def extract_lines_from_vcd_file(valid_path):
-            f = open(valid_path, "r")
-            wave_str_block = f.readlines()
-            f.close()
-            return wave_str_block
+    def extract_lines_from_vcd_file(self, valid_path):
+        f = open(valid_path, "r")
+        wave_str_block = f.readlines()
+        f.close()
+        return wave_str_block
 
+    def extract_values_from_wave(self, replay_blocks, excluded_sigs, inputs_only):
         def extract_scope_module_name(scope_hier):
             scope_s = scope_hier.split('.')
             if '.' in scope_hier:
@@ -95,29 +94,23 @@ class VcdReader(ReaderBase):
             # print (signals_hash)
             return signals_hash
 
-        def remove_the_unselected_signals(var_d, signal_l):
-            if signal_l:
-                for key, value in dict(var_d).items():
-                    if value not in signal_l:
-                        del var_d[key]
-                        print('{', key, ':', value, '} deleted from hash')
-
-        def extract_hash_from_wave_str(vcd_list, scope_hier, signal_l):
+        def extract_hash_from_wave_str(vcd_list, scope_hier, excluded_sigs):
             vcd_j = "".join(vcd_list)
             vcd_s = vcd_j.split("\n")
             hierarchy, scope_index = scope_finder(vcd_s, scope_hier)
-            var_dict = var2dict(vcd_s, scope_index)
-            remove_the_unselected_signals(var_dict, signal_l)
-            signals_h = singlas_record2hash(vcd_s, hierarchy, var_dict)
+            sig_list = var2dict(vcd_s, scope_index)
+            for sig in excluded_sigs:
+                print("Removing excluded sig: ", sig, " from the list of signals to get from vcd")
+                sig_list.pop(sig, None)         
+            signals_h = singlas_record2hash(vcd_s, hierarchy, sig_list)
             return signals_h
 
         # scope = self.vcd.scope_by_name(replay_block)
-        wave_str_block = extract_lines_from_vcd_file(self.vcd_path)
-
+        vcd_str = self.extract_lines_from_vcd_file(self.vcd_path)
         signal_values = {}
 
         for replay_block in replay_blocks:
-            signal_values.update(extract_hash_from_wave_str(wave_str_block, replay_block, self.signal_list))
+            signal_values.update(extract_hash_from_wave_str(vcd_str, replay_block, excluded_sigs))
 
         print('signals hash:')
         print(signal_values)

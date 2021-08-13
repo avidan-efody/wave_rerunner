@@ -14,7 +14,7 @@ class ReaderBase:
         self.signal_values = self.extract_values_from_wave(self.replay_blocks, self.excluded_sigs, inputs_only)
         self.signal_changes = self.extract_events(self.signal_values)
 
-    def extract_values_from_wave(self, replay_blocks, excluded_sigs = [], inputs_only=True):
+    def extract_values_from_wave(self, replay_blocks, excluded_sigs, inputs_only):
     	pass
 
     def extract_events(self, signal_values):
