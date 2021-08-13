@@ -14,6 +14,7 @@ module top();
       #10 clk <= ~clk;
     end
   end
+
 endmodule
 
 module block (
@@ -21,15 +22,15 @@ module block (
   output logic dout
 );
 
-reg [10:0] ctr = 0;
+  reg [10:0] ctr = 0;
 
-always @(posedge clk) begin
-  ctr <= ctr + 1;
+  always @(posedge clk) begin
+    ctr <= ctr + 1;
 
-  if (ctr !== 40)
-    dout <= din;
-end
+    if (ctr !== 40)
+      dout <= din;
+  end
 
-assert property(@(negedge clk) din == dout);
+  assert property(@(negedge clk) din == dout);
 
 endmodule
