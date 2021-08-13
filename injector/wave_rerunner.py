@@ -8,16 +8,26 @@ from cocotb.triggers import Timer
 
 from wave.reader import read_wave
 
-from injector.cocotb_injector import CocotbInjector
+from injector.cocotb_injector import CocotbInjector, CocotbDesignExplorer
+
+from rerun_args.customize import *
 
 @cocotb.test()
 async def test_empty(dut):
-    """ doesn't do anything. workaround for COCOTB_SIM define not working? """
     print("starting replay")
 
-    data = read_wave()
-    print(data.signal_values)
-    injector = CocotbInjector(dut)
+    # gets signals that cocotb can inject in relevant scopes
+    design_explorer = CocotbDesignExplorer(dut)
+
+    # get data from relevant wavefiles for the above signals
+    data = read_wave(list(design_explorer.basic_sigs.keys()))
+
+    # injects data on the signals
+    injector = CocotbInjector(design_explorer)
+
+    end_time = None
+    if hasattr(Arguments, 'end_time'):
+        end_time = Arguments.end_time
 
     sim_time = 0;
 
@@ -26,6 +36,6 @@ async def test_empty(dut):
         injector.inject_values(values)
         previous_time = sim_time
         sim_time = data.get_next_event(sim_time)
-        if sim_time == None:
+        if (sim_time == None) or ((end_time != None) and (sim_time >= end_time)): 
         	break
         await Timer(sim_time - previous_time)

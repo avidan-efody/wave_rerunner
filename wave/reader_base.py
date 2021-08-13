@@ -3,18 +3,14 @@ class ScopeNotFound(Exception):
     pass
 
 class ReaderBase:
-    def __init__(self, replay_blocks, wave_file, excluded_sigs, inputs_only):     
-        self.excluded_sigs = excluded_sigs if excluded_sigs != None else []
-        self.inputs_only = inputs_only if inputs_only != None else True
+    def __init__(self, clean_sig_list, wave_file, sigs_directions):  
+        self.sigs_directions = sigs_directions if sigs_directions != None else True
 
-        if type(replay_blocks) != list:
-            replay_blocks = [replay_blocks]
-        self.replay_blocks = replay_blocks
-
-        self.signal_values = self.extract_values_from_wave(self.replay_blocks, self.excluded_sigs, inputs_only)
+        self.signal_values = self.extract_values_from_wave(clean_sig_list, self.sigs_directions)
         self.signal_changes = self.extract_events(self.signal_values)
 
-    def extract_values_from_wave(self, replay_blocks, excluded_sigs, inputs_only):
+
+    def extract_values_from_wave(self, clean_sig_list, sigs_directions):
     	pass
 
     def extract_events(self, signal_values):

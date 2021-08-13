@@ -4,10 +4,10 @@ from wave.reader_base import ReaderBase
 import pytest
 
 class MockReader(ReaderBase):
-    def __init__(self, replay_block, wave_file, excluded_sigs, inputs_only):
-        super().__init__(replay_block, wave_file, excluded_sigs, inputs_only)
+    def __init__(self, replay_block, wave_file, excluded_sigs, sigs_directions):
+        super().__init__(replay_block, wave_file, excluded_sigs, sigs_directions)
 
-    def extract_values_from_wave(self, replay_block, excluded_sigs, inputs_only):
+    def extract_values_from_wave(self, replay_block, excluded_sigs, sigs_directions):
     	return {'top.block_i.clk': [(0, '0'), (10, '1'), (20, '0')], 'top.block_i.din': [(0, 'X'), (20, '0'), (40, '1')]}
 
 def test_get_next_event():

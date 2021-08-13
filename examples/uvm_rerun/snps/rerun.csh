@@ -4,6 +4,7 @@ setenv PYTHONPATH ../:$PYTHONPATH
 
 # required by cocotb
 setenv MODULE injector.wave_rerunner
+#setenv MODULE cocotb.ipython_support
 setenv TESTCASE ''
 setenv TOPLEVEL post_uvm_top 
 setenv TOPLEVEL_LANG verilog

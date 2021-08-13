@@ -5,17 +5,18 @@ import re
 from wave.reader_base import ReaderBase
 
 class VcdReader(ReaderBase):
-    def __init__(self, replay_blocks, wave_file, excluded_sigs, inputs_only):
+    def __init__(self, clean_sig_list, wave_file, sigs_directions):
         self.vcd_path = wave_file #self.check_file_names_are_valid(wave_file)
-        super().__init__(replay_blocks, wave_file, excluded_sigs, inputs_only)
 
-    def extract_lines_from_vcd_file(self, valid_path):
-        f = open(valid_path, "r")
-        wave_str_block = f.readlines()
-        f.close()
-        return wave_str_block
+        super().__init__(clean_sig_list, wave_file, sigs_directions)
 
-    def extract_values_from_wave(self, replay_blocks, excluded_sigs, inputs_only):
+    def extract_values_from_wave(self, clean_sig_list, sigs_directions):
+        def extract_lines_from_vcd_file(valid_path):
+            f = open(valid_path, "r")
+            wave_str_block = f.readlines()
+            f.close()
+            return wave_str_block
+
         def extract_scope_module_name(scope_hier):
             scope_s = scope_hier.split('.')
             if '.' in scope_hier:
@@ -94,24 +95,27 @@ class VcdReader(ReaderBase):
             # print (signals_hash)
             return signals_hash
 
-        def extract_hash_from_wave_str(vcd_list, scope_hier, excluded_sigs):
+        def extract_hash_from_wave_str(vcd_list, scope_hier):
             vcd_j = "".join(vcd_list)
             vcd_s = vcd_j.split("\n")
             hierarchy, scope_index = scope_finder(vcd_s, scope_hier)
-            sig_list = var2dict(vcd_s, scope_index)
-            for sig in excluded_sigs:
-                print("Removing excluded sig: ", sig, " from the list of signals to get from vcd")
-                sig_list.pop(sig, None)         
-            signals_h = singlas_record2hash(vcd_s, hierarchy, sig_list)
+            var_dict = var2dict(vcd_s, scope_index)
+            signals_h = singlas_record2hash(vcd_s, hierarchy, var_dict)
             return signals_h
 
         # scope = self.vcd.scope_by_name(replay_block)
-        vcd_str = self.extract_lines_from_vcd_file(self.vcd_path)
+        wave_str_block = extract_lines_from_vcd_file(self.vcd_path)
+
+        # extract block names from sigs (could also read the replay_blocks parameter)
+        replay_blocks = list(set(['.'.join(clean_sig.split('.')[:-1]) for clean_sig in clean_sig_list]))
+
         signal_values = {}
 
         for replay_block in replay_blocks:
-            signal_values.update(extract_hash_from_wave_str(vcd_str, replay_block, excluded_sigs))
+            signal_values.update(extract_hash_from_wave_str(wave_str_block, replay_block))
+
+        clean_signal_values = {clean_sig: signal_values[clean_sig] for clean_sig in clean_sig_list}
 
         print('signals hash:')
-        print(signal_values)
-        return signal_values
+        print(clean_signal_values)
+        return clean_signal_values
