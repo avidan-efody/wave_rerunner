@@ -1,6 +1,12 @@
 ﻿# introduction
  
-This repo contains code to read various wave formats (fsdb, shm, vcd, wlf) into python and then reinject selected parts into selected parts of the design. The applications in the examples directory show how this can be used to:
+This repo contains code to read various wave formats (fsdb, shm, vcd, wlf) into python and then reinject selected parts into selected parts of the design. A typical use case for this code would be:
+
+* A test takes very long, because it runs a big RTL and testbench
+* You've only changed a UVM checker or an assertion
+* You'd like to check the modified UVM checker or assertion without rerunning the big RTL
+
+The applications in the examples directory show how to do exactly that:
 
 * [Rerun SVA assertions without rerunning the whole RTL](examples/sva_rerun/README.md)
 * [Rerun UVM checkers, coverage and RAL monitor without any RTL](examples/uvm_rerun/README.md)
