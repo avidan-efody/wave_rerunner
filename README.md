@@ -44,6 +44,8 @@ Since these interfaces hold all the signals your coverage and checkers ever see,
 
 Note that your new top can still inject the clocks. There's little point, and quite a bit of performance/memory penalty to reading and replaying those.
 
+![alt-text](https://github.com/avidan-efody/assertion_rerun/blob/main/examples/uvm_rerun/uvm_rerun.png)
+
 ## SVA rerun
 
 Assume you have run a regression with a simulation top called cluster_top and saved relevant FSDBs with all or a few levels down recorded. You have now modified an assertion inside cluster_top.block_top.subblock_top, and you would prefer not to rerun the whole cluster just to check it, all the more so since you're not sure of the assertion, and think it might take a few iterations.
