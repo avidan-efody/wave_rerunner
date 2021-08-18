@@ -11,8 +11,6 @@ The applications in the examples directory, described in detail below, show how 
 * [Rerun UVM checkers, coverage and RAL monitor without any RTL](https://github.com/avidan-efody/wave_rerunner#uvm-rerun)
 * [Rerun SVA assertions without rerunning the whole RTL](https://github.com/avidan-efody/wave_rerunner#sva-rerun)
 
-Refer to above links for detailed description of each application.
-
 # structure
 
 * wave/ - contains python modules that read wave files in various formats (fsdb, vcd, shm, wlf) into python data structure. Currently fsdb is fully supported, vcd partially supported, and others are not supported yet. Refer to support matrix for more info.
@@ -62,6 +60,12 @@ You can obtain even faster runtime by creating a module that contains only your 
 
 Finally, if your wave file contains clocks, you could obtain faster run-time and smaller memory foot-print, by not replaying those from the wave file, but rather, keeping the original clock generators in the rerun setup. Since this technique is common to SVA rerun and UVM rerun, it is covered elsewhere.
 
+![alt-text](https://github.com/avidan-efody/assertion_rerun/blob/main/examples/sva_rerun/assertion-rerun.gif)
+
+## Detailed operation
+
+TBD
+
 # pre-requisites
 
 * cocotb (currently required for injecting anything back)
@@ -81,8 +85,6 @@ cd ../../sva_rerun/[vendor]/
 source run.csh 
 source rerun.csh
 ```
-
-![alt-text](https://github.com/avidan-efody/assertion_rerun/blob/main/examples/sva_rerun/assertion-rerun.gif)
 
 ## UVM rerun
 
